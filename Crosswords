@@ -1,0 +1,52 @@
+% Word(W, List, Length) is true when word W has length Length and the letters of word are contained in List
+word(apple, [a,p,p,l,e], 5).
+word(pineapple, [p,i,n,e,a,p,p,l,e], 9).
+word(orange, [o,r,a,n,g,e], 6).
+word(cherry, [c,h,e,r,r,y], 6).
+word(banana, [b,a,n,a,n,a], 6).
+word(crab, [c,r,a,b], 4).
+word(dinner, [d,i,n,n,e,r], 6).
+word(loafer, [l,o,a,f,e,r], 6).
+word(sandal, [s,a,n,d,a,l], 6).
+word(panda, [p,a,n,d,a], 5).
+word(ale, [a,l,e], 3).
+
+%% CROSSWORD SOLVER 
+
+% intersection(W1, W2, I1, I2) is true if word W1 has an intersection with word W2 at index I1 for W1 and I2 for W2 indexes start at 0.
+intersection(Word1, Word2, Index1, Index2):-
+% Word1 and Word 2 have to be different
+	dif(Word1, Word2),
+	word(Word1, List1, Length1),
+% True when Letter is the Index'th Letter of List. Counting starts at 0.
+	nth0(Index1, List1, Letter),
+	Index1 < Length1,
+	word(Word2, List2, Length2),
+% True when Letter is the Index'th Letter of List. Counting starts at 0.
+	nth0(Index2, List2, Letter),
+	Index2 < Length2.
+	
+% Implementation of our custom crossword
+
+% Inicialating the words and indicating where they are conected
+my_cw(A1,A2,A3,A4,D5,D6,D7,D8,D9):-
+	intersection(A1, D9, 2, 0),
+	intersection(A2, D5, 0, 1),
+	intersection(A2, D6, 2, 2),
+	intersection(A2, D7, 4, 1),
+	intersection(A2, D8, 6, 0),
+	intersection(A2, D9, 8, 2),
+	intersection(A3, D7, 0, 3),
+	intersection(A3, D8, 2, 2),
+	intersection(A4, D7, 0, 5),
+	intersection(A4, D8, 2, 4),
+% Declarating the size of each word (declaring the list of letters as a anonymous variable)
+	word(A1, _, 4),
+	word(A2, _, 9),
+	word(A3, _, 6),
+	word(A4, _, 6),
+	word(D5, _, 5),
+	word(D6, _, 6),
+	word(D7, _, 6),
+	word(D8, _, 5),
+	word(D9, _, 3).
