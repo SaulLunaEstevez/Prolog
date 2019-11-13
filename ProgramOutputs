@@ -1,0 +1,10 @@
+?- my_cw(A1,A2,A3,A4,D5,D6,D7,D8,D9).
+A1 = crab,
+A2 = pineapple,
+A3 = dinner,
+A4 = loafer,
+D5 = apple,
+D6 = banana,
+D7 = sandal,
+D8 = panda,
+D9 = ale
